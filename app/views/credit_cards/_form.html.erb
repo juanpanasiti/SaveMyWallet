@@ -1,0 +1,13 @@
+<%= simple_form_for(@credit_card) do |f| %>
+<%= f.error_notification %>
+
+<div class="form-inputs">
+  <%= f.input :issuer, required: true %>
+  <%= f.input :kind, required: true %>
+  <%= f.input :expiration, required: true %>
+</div>
+
+<div class="form-actions">
+  <%= f.button :submit, "Crear" %>
+</div>
+<% end %>

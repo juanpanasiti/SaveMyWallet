@@ -1,2 +1,22 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>Dashboard</h1>
+<div class="row">
+  <div class="col-lg-10 col-md-9 col-sm-7 col-xs-12">
+    <h3>Cuotas por pagar</h3>
+  </div>
+  <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+    <h4>Tarjetas de crédito <small>(<%= @credit_cards.count %>)</small></h4>
+    <% @credit_cards.each do |cc| %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"> <%= cc.issuer %> </h5>
+        <h6 class="card-subtitle mb-2 text-muted"> <%= cc.kind %> </h6>
+        <p class="card-text">Vence <%= cc.expiration %></p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+    <% end %>
+
+    <%= link_to icon('fas','credit-card', "Abregar TC"), new_credit_card_path, class: "btn btn-success" %>
+  </div>
+</div>

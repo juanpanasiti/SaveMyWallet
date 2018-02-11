@@ -1,4 +1,4 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+// This is a manifest file that'll be compirails generate devise:installled into application.js, which will include all the files
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
@@ -11,8 +11,10 @@
 // about supported directives.
 //
 //= require jquery3
+//= require datetime_picker_input
 //= require popper
 //= require bootstrap-sprockets
+//= require dataTables/jquery.dataTables
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
