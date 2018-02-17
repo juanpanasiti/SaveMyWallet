@@ -1,0 +1,18 @@
+<%= simple_form_for(@purchase) do |f| %>
+<%= f.error_notification %>
+
+<div class="form-inputs">
+  <%= f.input :item_name, required: true %>
+  <%= f.association :credit_card, required: true %>
+  <%= f.input :amount, required: true %>
+  <%= f.input :fees, required: true %>
+  <%= f.input :first_payment, required: false, as: :date, start_year: Date.today.year - 1,
+                              end_year: Date.today.year + 1, discard_day: true,
+                              order: [:month, :year] %>
+</div>
+
+<div class="form-actions">
+  <%= f.button :submit, "Crear" %>
+  <%= link_to "Cancelar", purchases_path, class: "btn btn-warning" %>
+</div>
+<% end %>

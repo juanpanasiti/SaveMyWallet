@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
     @credit_cards = current_user.credit_cards
-    @new_credit_card = current_user.credit_cards.new
+    @payments = Payment.all
+    @purchases = Purchase.no_charged
   end
 
   def new_credit_card

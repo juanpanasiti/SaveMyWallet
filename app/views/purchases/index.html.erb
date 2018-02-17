@@ -1,0 +1,34 @@
+<h1>Compras hechas</h1>
+<%= link_to icon('fas','plus','Nueva compra'), new_purchase_path, class: "btn btn-primary" %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Detalle</th>
+      <th>Tarjeta</th>
+      <th>Monto</th>
+      <th>Cuotas</th>
+      <th>1er Pago</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @purchases.each do |p| %>
+    <tr>
+      <td> <%= p.item_name %> </td>
+      <td> <%= p.credit_card_name %> </td>
+      <td> <%= p.amount %> </td>
+      <td> <%= p.fees %> </td>
+      <td> <%= get_month_year p.first_payment %> </td>
+      <td>
+        <% if p.has_payments? %>
+          <%= link_to icon('fas','trash',''), delete_payments_purchase_path(p), method: :delete, class: "btn btn-danger" %>
+        <% else %>
+          <%= link_to icon('fas','dollar-sign',''), set_payments_purchase_path(p), method: :post, class: "btn btn-warning" %>
+        <% end %>
+        <%= link_to icon('fas','edit',''), edit_purchase_path(p), class: "btn btn-primary" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to icon('fas','arrow-left','Volver'), root_path, class: "btn btn-warning" %>

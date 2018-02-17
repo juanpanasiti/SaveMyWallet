@@ -2,19 +2,58 @@
 <div class="row">
   <div class="col-lg-10 col-md-9 col-sm-7 col-xs-12">
     <h3>Cuotas por pagar</h3>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>Compra</th>
+          <th>Tarjeta</th>
+          <th>Cuota</th>
+          <th>Mes</th>
+          <th>Monto</th>
+          <th>Estado</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payments.each do |payment| %>
+        <tr class="<%= set_payment_row_class(payment.status,payment.month_to_pay) %>">
+          <td><%= payment.purchase.item_name %></td>
+          <td><%= payment.purchase.credit_card_name %></td>
+          <td><%= "#{payment.fee}/#{payment.purchase.fees}" %></td>
+          <td><%= payment.month_to_pay %></td>
+          <td><%= payment.amount %></td>
+          <td><%= payment.status %></td>
+          <td></td>
+        </tr>
+        <% end %>
+        <% @purchases.each do |simulated| %>
+          <% for fee in 1..simulated.fees do %>
+          <tr class="table-dark">
+            <td><%= simulated.item_name %></td>
+            <td><%= simulated.credit_card_name %></td>
+            <td><%= "#{fee}/#{simulated.fees}" %></td>
+            <td><%= simulated.first_payment.advance(months: (fee - 1)).strftime("%b%y") %></td>
+            <td><%= (simulated.amount / simulated.fees).round(2) %></td>
+            <td><%= "Simulado" %></td>
+            <td></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to icon('fas','shopping-cart','Compras hechas'), purchases_path, class: "btn btn-primary" %>
   </div>
   <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
     <h4>Tarjetas de crédito <small>(<%= @credit_cards.count %>)</small></h4>
     <% @credit_cards.each do |cc| %>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"> <%= cc.issuer %> </h5>
-        <h6 class="card-subtitle mb-2 text-muted"> <%= cc.kind %> </h6>
-        <p class="card-text">Vence <%= cc.expiration %></p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"> <%= cc.issuer %> </h5>
+          <h6 class="card-subtitle mb-2 text-muted"> <%= cc.kind %> </h6>
+          <p class="card-text">Vence <%= get_month_year cc.expiration %></p>
+          <a href="#" class="card-link">Card link</a>
+        </div>
       </div>
-    </div>
     <% end %>
 
     <%= link_to icon('fas','credit-card', "Abregar TC"), new_credit_card_path, class: "btn btn-success" %>

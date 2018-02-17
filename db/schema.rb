@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207221702) do
+ActiveRecord::Schema.define(version: 20180213181317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20180207221702) do
     t.decimal "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["purchase_id"], name: "index_payments_on_purchase_id"
   end
 
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 20180207221702) do
     t.integer "fees"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "first_payment"
     t.index ["credit_card_id"], name: "index_purchases_on_credit_card_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end

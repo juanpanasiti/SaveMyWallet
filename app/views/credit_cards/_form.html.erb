@@ -4,7 +4,9 @@
 <div class="form-inputs">
   <%= f.input :issuer, required: true %>
   <%= f.input :kind, required: true %>
-  <%= f.input :expiration, required: true %>
+  <%= f.input :expiration, required: true, as: :date, start_year: Date.today.year,
+                              end_year: Date.today.year + 30, discard_day: true,
+                              order: [:month, :year] %>
 </div>
 
 <div class="form-actions">
