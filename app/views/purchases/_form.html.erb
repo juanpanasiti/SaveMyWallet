@@ -2,13 +2,27 @@
 <%= f.error_notification %>
 
 <div class="form-inputs">
-  <%= f.input :item_name, required: true %>
-  <%= f.association :credit_card, required: true %>
-  <%= f.input :amount, required: true %>
-  <%= f.input :fees, required: true %>
-  <%= f.input :first_payment, required: false, as: :date, start_year: Date.today.year - 1,
-                              end_year: Date.today.year + 1, discard_day: true,
-                              order: [:month, :year] %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+      <%= f.input :item_name, label: 'Nombre descriptivo', required: true %>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-2">
+      <%= f.input :credit_card, label:'Tarjeta de crédito', collection: @credit_cards_options %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-2">
+      <%= f.input :amount, label: 'Monto', required: true %>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-2">
+      <%= f.input :fees , label: 'Cuotas', required: true, input_html: { min: '-1', step: '1' } %>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-3">
+      <%= f.input :first_payment, label: 'Primer pago', required: false, as: :date, start_year: Date.today.year - 1,
+      end_year: Date.today.year + 1, discard_day: true,
+      order: [:month, :year] %>
+    </div>
+  </div>
 </div>
 
 <div class="form-actions">

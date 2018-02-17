@@ -1,5 +1,6 @@
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:edit, :update, :delete, :set_payments, :delete_payments]
+  before_action :options_for_select, only: [:new, :create, :edit, :update]
   def index
     @purchases = Purchase.all
   end
@@ -49,5 +50,8 @@ class PurchasesController < ApplicationController
   end
   def set_purchase
     @purchase = Purchase.find(params[:id])
+  end
+  def options_for_select
+    @credit_cards_options = CreditCard.get_all
   end
 end
