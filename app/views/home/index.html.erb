@@ -16,26 +16,26 @@
       </thead>
       <tbody>
         <% @payments.each do |payment| %>
-        <tr class="<%= set_payment_row_class(payment.status,payment.month_to_pay) %>">
-          <td><%= payment.purchase.item_name %></td>
-          <td><%= payment.purchase.credit_card_name %></td>
-          <td><%= "#{payment.fee}/#{payment.purchase.fees}" %></td>
-          <td><%= payment.month_to_pay %></td>
-          <td><%= payment.amount %></td>
-          <td><%= payment.status %></td>
-          <td></td>
+        <tr class="<%= set_payment_row_class(payment) %>">
+          <td class="center-text-v"><%= payment.purchase.item_name %></td>
+          <td class="center-text-v"><%= payment.purchase.credit_card_name %></td>
+          <td class="center-text-v"><%= "#{payment.fee}/#{payment.purchase.fees}" %></td>
+          <td class="center-text-v"><%= payment.month_to_pay %></td>
+          <td class="center-text-v"><%= payment.amount %></td>
+          <td class="center-text-v"><%= payment.status %></td>
+          <td class="center-text-v"><%= link_to icon('fas','money'), pay_payment_path(payment), method: :post, class: "btn btn-primary" %></td>
         </tr>
         <% end %>
         <% @purchases.each do |simulated| %>
           <% for fee in 1..simulated.fees do %>
           <tr class="table-dark">
-            <td><%= simulated.item_name %></td>
-            <td><%= simulated.credit_card_name %></td>
-            <td><%= "#{fee}/#{simulated.fees}" %></td>
-            <td><%= simulated.first_payment.advance(months: (fee - 1)).strftime("%b%y") %></td>
-            <td><%= (simulated.amount / simulated.fees).round(2) %></td>
-            <td><%= "Simulado" %></td>
-            <td></td>
+            <td class="center-text-v"><%= simulated.item_name %></td>
+            <td class="center-text-v"><%= simulated.credit_card_name %></td>
+            <td class="center-text-v"><%= "#{fee}/#{simulated.fees}" %></td>
+            <td class="center-text-v"><%= simulated.first_payment.advance(months: (fee - 1)).strftime("%b%y") %></td>
+            <td class="center-text-v"><%= (simulated.amount / simulated.fees).round(2) %></td>
+            <td class="center-text-v"><%= "Simulado" %></td>
+            <td class="center-text-v"></td>
           </tr>
           <% end %>
         <% end %>

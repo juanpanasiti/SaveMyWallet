@@ -10,7 +10,24 @@ class Payment < ApplicationRecord
     month = self.purchase.first_payment.advance(months: (self.fee - 1)).end_of_month
     # Purchase.first.first_payment.advance(months: Purchase.last.fees).month
     return month.strftime("%b%y")
-  end
+  end # month_to_pay
+
+  def pay
+    self.status = "Pagado"
+    if self.save
+      return true
+    else
+      return false
+    end
+  end #pay
+
+  def last_fee?
+    is_the_last = false
+    if self.fee == self.purchase.fees
+      is_the_last = true
+    end
+    return is_the_last
+  end #last_fee?
   #### CLASS METHODS
   def self.add_payments(purchase)
     amount_per_fee = purchase.amount / purchase.fees

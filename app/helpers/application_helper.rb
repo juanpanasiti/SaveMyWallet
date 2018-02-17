@@ -5,14 +5,22 @@ module ApplicationHelper
     end
   end
 
-  def set_payment_row_class(status,month)
-    row_class = 'table-dark'
-    if status == 'Para pagar'
-      row_class = 'table-primary'
+  def set_payment_row_class(payment)
+    status = payment.status
+    month = payment.month_to_pay
+    row_class = case status
+    when 'Para pagar' then 'table-primary'
+    when 'Pagado' then 'table-secondary'
+    else 'table-dark'
+    end #case
+    unless row_class != 'table-dark'
+      if month == Time.now.strftime("%b%y")
+        row_class = 'table-warning'
+      end
     end
-    if month == Time.now.strftime("%b%y")
-      row_class = 'table-warning'
+    if payment.last_fee?
+      row_class.concat(" last-fee")
     end
     return row_class
-  end
+  end #set_payment_row_class
 end
