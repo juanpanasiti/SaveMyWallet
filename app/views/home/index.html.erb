@@ -1,4 +1,5 @@
 <h1>Dashboard</h1>
+<%= link_to icon('fas','shopping-cart','Compras hechas'), purchases_path, class: "btn btn-primary" %>
 <div class="row">
   <div class="col-lg-10 col-md-9 col-sm-7 col-xs-12">
     <h3>Cuotas por pagar</h3>
@@ -20,7 +21,7 @@
           <td class="center-text-v"><%= payment.purchase.item_name %></td>
           <td class="center-text-v"><%= payment.purchase.credit_card_name %></td>
           <td class="center-text-v"><%= "#{payment.fee}/#{payment.purchase.fees}" %></td>
-          <td class="center-text-v"><%= payment.month_to_pay %></td>
+          <td class="center-text-v"><%= l(payment.month_to_pay, format: :month_year_abbr) %></td>
           <td class="center-text-v"><%= payment.amount %></td>
           <td class="center-text-v"><%= payment.status %></td>
           <td class="center-text-v"><%= link_to icon('fas','dollar-sign'), pay_payment_path(payment), method: :post, class: "btn btn-primary" %></td>

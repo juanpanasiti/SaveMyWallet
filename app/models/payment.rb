@@ -8,8 +8,7 @@ class Payment < ApplicationRecord
   #### OBJECT METHODS
   def month_to_pay
     month = self.purchase.first_payment.advance(months: (self.fee - 1)).end_of_month
-    # Purchase.first.first_payment.advance(months: Purchase.last.fees).month
-    return month.strftime("%b%y")
+    return month
   end # month_to_pay
 
   def pay

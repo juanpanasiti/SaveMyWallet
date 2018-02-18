@@ -1,0 +1,22 @@
+es:
+  hello_world: "Hola Mundo!"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "La validación falló: %{errors}"
+        restrict_dependent_destroy:
+          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+          has_many: No se puede eliminar el registro porque existen %{record} dependientes
+  date:
+    abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sab]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    day_names: [Domingo, Lunes, Martes, Miercoles, Jueves, Viernes, Sábado]
+    formats:
+      day_month: "%b %d"
+      default: "%Y-%m-%d"
+      hour: "%H:%M"
+      long: "%A %d %B %Y"
+      long_month: "%d %B %Y"
+      month_abbr: "%d %b %Y"
+      month_year_abbr: "%b%y"
