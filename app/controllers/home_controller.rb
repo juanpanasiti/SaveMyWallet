@@ -3,6 +3,7 @@ class HomeController < ApplicationController
     @credit_cards = current_user.credit_cards
     @payments = Payment.all
     @purchases = Purchase.no_charged
+    @months_resume = Purchase.months_resume
   end
 
   def new_credit_card

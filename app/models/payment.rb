@@ -19,6 +19,14 @@ class Payment < ApplicationRecord
       return false
     end
   end #pay
+  def unpay
+    self.status = "Para pagar"
+    if self.save
+      return true
+    else
+      return false
+    end
+  end #pay
 
   def last_fee?
     is_the_last = false
@@ -27,6 +35,7 @@ class Payment < ApplicationRecord
     end
     return is_the_last
   end #last_fee?
+
   #### CLASS METHODS
   def self.add_payments(purchase)
     amount_per_fee = purchase.amount / purchase.fees
@@ -42,4 +51,10 @@ class Payment < ApplicationRecord
     end #for
     return ok
   end #add_payments
+
+  def self.months_resume
+    payments = Payment.all
+
+    return [['Feb18',5000],['Mar18',4500],['Abr18',4000],['May18',4000]]
+  end
 end

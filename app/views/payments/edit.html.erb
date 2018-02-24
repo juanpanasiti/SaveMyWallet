@@ -1,0 +1,17 @@
+<h2>Editar monto de la cuota <%= @payment.fee %> de <%= @payment.purchase.item_name %></h2>
+<%= simple_form_for(@payment) do |f| %>
+<%= f.error_notification %>
+
+<div class="form-inputs">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+      <%= f.input :amount, label: 'Monto de cuota', required: true %>
+    </div>
+  </div>
+</div>
+
+<div class="form-actions">
+  <%= f.button :submit, "Editar" %>
+  <%= link_to "Cancelar", root_url, class: "btn btn-warning" %>
+</div>
+<% end %>

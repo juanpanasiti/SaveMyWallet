@@ -22,9 +22,16 @@
           <td class="center-text-v"><%= payment.purchase.credit_card_name %></td>
           <td class="center-text-v"><%= "#{payment.fee}/#{payment.purchase.fees}" %></td>
           <td class="center-text-v"><%= l(payment.month_to_pay, format: :month_year_abbr) %></td>
-          <td class="center-text-v"><%= payment.amount %></td>
+          <td class="center-text-v"><%= to_current payment.amount %></td>
           <td class="center-text-v"><%= payment.status %></td>
-          <td class="center-text-v"><%= link_to icon('fas','dollar-sign'), pay_payment_path(payment), method: :post, class: "btn btn-primary" %></td>
+          <td class="center-text-v">
+            <% if payment.status == "Para pagar" %>
+            <%= link_to icon('fas','dollar-sign'), pay_payment_path(payment), method: :post, class: "btn btn-primary btn-sm" %>
+            <% elsif payment.status == "Pagado" %>
+            <%= link_to icon('fas','dollar-sign'), unpay_payment_path(payment), method: :post, class: "btn btn-danger btn-sm" %>
+            <% end %>
+            <%= link_to "Edit", edit_payment_path(payment), class: "btn btn-warning btn-sm" %>
+          </td>
         </tr>
         <% end %>
         <% @purchases.each do |simulated| %>
@@ -34,7 +41,7 @@
             <td class="center-text-v"><%= simulated.credit_card_name %></td>
             <td class="center-text-v"><%= "#{fee}/#{simulated.fees}" %></td>
             <td class="center-text-v"><%= simulated.first_payment.advance(months: (fee - 1)).strftime("%b%y") %></td>
-            <td class="center-text-v"><%= (simulated.amount / simulated.fees).round(2) %></td>
+            <td class="center-text-v"><%= to_current (simulated.amount / simulated.fees).round(2) %></td>
             <td class="center-text-v"><%= "Simulado" %></td>
             <td class="center-text-v"></td>
           </tr>
@@ -45,18 +52,34 @@
     <%= link_to icon('fas','shopping-cart','Compras hechas'), purchases_path, class: "btn btn-primary" %>
   </div>
   <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-    <h4>Tarjetas de crédito <small>(<%= @credit_cards.count %>)</small></h4>
-    <% @credit_cards.each do |cc| %>
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"> <%= cc.issuer %> </h5>
-          <h6 class="card-subtitle mb-2 text-muted"> <%= cc.kind %> </h6>
-          <p class="card-text">Vence <%= get_month_year cc.expiration %></p>
-          <a href="#" class="card-link">Card link</a>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".bd-example-modal-lg">
+      <%= icon('far','credit-card', 'Ver tarjetas') %>
+    </button>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content container-fluid">
+          <%= render "credit_cards" %>
         </div>
       </div>
-    <% end %>
-
-    <%= link_to icon('fas','credit-card', "Agregar TC"), new_credit_card_path, class: "btn btn-success" %>
+    </div> <!-- END modal-body -->
+    <br>
+    <div id="amounts-per-month">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Monto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @months_resume.each do |month| %>
+          <tr>
+            <td><%= l(month[0], format: :month_year_abbr) %></td>
+            <td><%= to_current month[1] %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

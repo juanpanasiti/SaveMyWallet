@@ -1,0 +1,17 @@
+<h2>Tarjetas de crédito <small>(<%= @credit_cards.count %>)</small></h2>
+<div class="row">
+    <% @credit_cards.each do |cc| %>
+    <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"> <%= cc.issuer %> </h5>
+          <h6 class="card-subtitle mb-2 text-muted"> <%= cc.kind %> </h6>
+          <p class="card-text">Vence <%= get_month_year cc.expiration %></p>
+          <a href="#" class="card-link">Card link</a>
+        </div>
+      </div>
+      <br>
+    </div>
+    <% end %>
+</div>
+<%= link_to icon('fas','credit-card', "Agregar TC"), new_credit_card_path, class: "btn btn-success" %>
