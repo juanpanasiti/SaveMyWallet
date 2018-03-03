@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-lg-10 col-md-9 col-sm-7 col-xs-12">
     <h3>Cuotas por pagar</h3>
-    <table class="table table-hover">
+    <table class="table table-hover" id="table-payments">
       <thead class="thead-dark">
         <tr>
           <th>Compra</th>
@@ -48,6 +48,13 @@
           <% end %>
         <% end %>
       </tbody>
+      <script type="text/javascript">
+  $(document).ready(function(){
+    $('#table-payments').DataTable( {
+      responsive: true
+    } );
+  });
+  </script>
     </table>
     <%= link_to icon('fas','shopping-cart','Compras hechas'), purchases_path, class: "btn btn-primary" %>
   </div>
