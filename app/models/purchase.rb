@@ -25,7 +25,12 @@ class Purchase < ApplicationRecord
     purchases.each do |purchase|
       for i in 0..(purchase.fees - 1)
         if purchase.payments.count > 0
-          fee_amount = purchase.payments.where(fee: i+1).first.amount
+          to_pay = purchase.payments.where(fee: i+1).first
+          if to_pay.status == "Para pagar"
+            fee_amount = to_pay.amount
+          else
+            fee_amount = 0
+          end
         else
           fee_amount = (purchase.amount / purchase.fees).round(2)
         end
@@ -40,7 +45,9 @@ class Purchase < ApplicationRecord
           end #if
         end #each_do m
         unless added
-          resume << [payment_date, fee_amount]
+          if fee_amount > 0
+            resume << [payment_date, fee_amount]
+          end
         end #unless added
       end #for
     end #each_do purchase
