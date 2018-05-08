@@ -7,7 +7,7 @@
           <h5 class="card-title"> <%= cc.issuer %> </h5>
           <h6 class="card-subtitle mb-2 text-muted"> <%= cc.kind %> </h6>
           <p class="card-text">Vence <%= get_month_year cc.expiration %></p>
-          <a href="#" class="card-link">Card link</a>
+          <%= link_to icon('fas','edit', "Editar"), edit_credit_card_path(cc), class: "card-link" %>
         </div>
       </div>
       <br>
