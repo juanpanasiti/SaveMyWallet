@@ -16,7 +16,7 @@
     <tr>
       <td> <%= p.item_name %> </td>
       <td> <%= p.credit_card_name %> </td>
-      <td> <%= p.amount %> </td>
+      <td> <%= number_to_currency p.amount %> </td>
       <td> <%= p.fees %> </td>
       <td> <%= get_month_year p.first_payment %> </td>
       <td>

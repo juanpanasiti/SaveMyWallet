@@ -2,6 +2,15 @@ class Purchase < ApplicationRecord
   belongs_to :credit_card
   has_many :payments
 
+  before_destroy :delete_payments
+
+  def delete_payments
+    self.payments.each do |payment|
+      payment.delete
+    end
+    return true
+  end
+
   def credit_card_name
     cc = self.credit_card
     name = "#{cc.issuer} #{cc.kind}"

@@ -22,7 +22,7 @@
           <td class="center-text-v"><%= payment.purchase.credit_card_name %></td>
           <td class="center-text-v"><%= "#{payment.fee}/#{payment.purchase.fees}" %></td>
           <td class="center-text-v"><%= l(payment.month_to_pay, format: :month_year_abbr) %></td>
-          <td class="center-text-v"><%= to_current payment.amount %></td>
+          <td class="center-text-v"><%= number_to_currency payment.amount %></td>
           <td class="center-text-v"><%= payment.status %></td>
           <td class="center-text-v">
             <% if payment.status == "Para pagar" %>

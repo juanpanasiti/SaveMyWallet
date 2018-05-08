@@ -41,7 +41,11 @@ class PurchasesController < ApplicationController
   end
 
   def delete_payments
-    redirect_to root_path, alert: 'no se borró nada!'
+    if @purchase.destroy
+      redirect_to root_path, notice: 'Compra y cuotas eliminadas de la lista'
+    else
+      redirect_to root_path, alert: 'No se borró nada!'
+    end
   end
 
   protected
