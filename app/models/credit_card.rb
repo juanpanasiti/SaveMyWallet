@@ -5,9 +5,9 @@ class CreditCard < ApplicationRecord
     return "#{self.issuer} #{self.kind}"
   end
   #### CLASS METHODS
-  def self.get_all
+  def self.get_all(current_user)
     cc = []
-    CreditCard.all.each do |c|
+    current_user.credit_cards.all.each do |c|
       cc << [c.get_name, c.id]
     end #each_do
     return cc

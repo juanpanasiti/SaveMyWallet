@@ -1,5 +1,6 @@
 class Purchase < ApplicationRecord
   belongs_to :credit_card
+  belongs_to :user
   has_many :payments
 
   before_destroy :delete_payments

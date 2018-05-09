@@ -2,15 +2,15 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:edit, :update, :delete, :set_payments, :delete_payments]
   before_action :options_for_select, only: [:new, :create, :edit, :update]
   def index
-    @purchases = Purchase.all
+    @purchases = current_user.purchases.all
   end
 
   def new
-    @purchase = Purchase.new
+    @purchase = current_user.purchases.new
   end
 
   def create
-    @purchase = Purchase.new(purchase_params)
+    @purchase = current_user.purchases.new(purchase_params)
     if @purchase.save
       redirect_to purchases_path, notice: 'Compra agregada.'
     end
@@ -56,6 +56,6 @@ class PurchasesController < ApplicationController
     @purchase = Purchase.find(params[:id])
   end
   def options_for_select
-    @credit_cards_options = CreditCard.get_all
+    @credit_cards_options = CreditCard.get_all(current_user)
   end
 end

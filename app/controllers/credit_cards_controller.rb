@@ -5,8 +5,8 @@ class CreditCardsController < ApplicationController
     @credit_card = CreditCard.new
   end
   def create
-    @credit_card = CreditCard.new(credit_card_params)
-    @credit_card.user_id = current_user.id
+    @credit_card = current_user.credit_cards.new(credit_card_params)
+    #@credit_card.user_id = current_user.id
     if @credit_card.save
       redirect_to root_path, notice: 'Tarjeta de Crédito creada.'
     end

@@ -4,4 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :credit_cards
+  has_many :purchases
+  has_many :payments, through: :purchases
+
+  ###### OBJECTS METHODS
+  
 end
