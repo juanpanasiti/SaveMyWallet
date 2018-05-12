@@ -5,8 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :credit_cards
   has_many :purchases
+  has_many :taxes
   has_many :payments, through: :purchases
 
   ###### OBJECTS METHODS
-  
+
 end

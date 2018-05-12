@@ -6,6 +6,7 @@ class CreateTaxes < ActiveRecord::Migration[5.1]
       t.date :exp_date
       t.text :note
       t.belongs_to :user, foreign_key: true
+      t.string :status
 
       t.timestamps
     end

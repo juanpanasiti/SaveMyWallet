@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
   resources :credit_cards
+  resources :taxes
   resources :purchases do
     member do
       post 'set_payments'

@@ -1,0 +1,33 @@
+<%= simple_form_for(@tax) do |f| %>
+<%= f.error_notification %>
+<div class="container">
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= f.input :name, label: 'Factura', required: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-4 col-lg-2">
+        <%= f.input :amount, label: 'Monto a pagar', required: true %>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-3">
+        <%= f.input :status, label: 'Estado del pago', collection: @status_options, include_blank: false %>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+        <%= f.input :exp_date, label: 'Vencimiento', as: :date, start_year: Date.today.year, end_year: Date.today.year + 1, order: [:day, :month, :year] %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= f.input :note, label: 'Aclaraciones', required: true %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-actions">
+  <%= f.button :submit, btn_name %>
+  <%= link_to "Cancelar", taxes_path, class: "btn btn-warning" %>
+</div>
+<% end %>

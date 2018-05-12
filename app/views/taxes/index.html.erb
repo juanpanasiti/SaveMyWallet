@@ -1,0 +1,29 @@
+<h2>Impuestos </h2>
+<%= link_to icon('fas','plus-circle','Nuevo Impuesto'), new_tax_path, class: "btn btn-success" %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Factura</th>
+      <th>Monto</th>
+      <th>Vencimiento</th>
+      <th>Estado</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @taxes.each do |tax| %>
+    <tr>
+      <td><%= tax.name %></td>
+      <td><%= number_to_currency tax.amount %></td>
+      <td><%= tax.exp_date.strftime("%d/%m/%Y") %></td>
+      <td><%= tax.status %></td>
+      <td>
+        <div class="btn-group" role="group" >
+          <%= link_to icon('fas','trash'), tax_path(tax), method: :delete, class: "btn btn-danger", data: { confirm: "Esta acción no se puede deshacer!!" } %>
+          <%= link_to icon('fas','edit'), edit_tax_path(tax), class: "btn btn-warning" %>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

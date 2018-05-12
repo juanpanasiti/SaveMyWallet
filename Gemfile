@@ -57,7 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails' #needed for bootstrap
 gem 'font-awesome-sass', '~> 5.0', '>= 5.0.9'
-gem 'simple_form', '~> 3.5'
+gem 'simple_form', '~> 4.0'
 gem 'devise', '~> 4.4', '>= 4.4.1'
 gem 'datetime_picker_input', '~> 4.17', '>= 4.17.47'
 gem 'jquery-datatables-rails', '~> 3.4' # For sorting and filtering
