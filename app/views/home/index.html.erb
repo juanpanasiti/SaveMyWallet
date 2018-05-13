@@ -81,8 +81,8 @@
         <tbody>
           <% @months_resume.each do |month| %>
           <tr>
-            <td><%= l(month[0], format: :month_year_abbr) %></td>
-            <td><%= to_current month[1] %></td>
+            <td class="center-text-v"><%= l(month[0], format: :month_year_abbr) %></td>
+            <td class="center-text-v"><%= link_to "#{to_current month[1]}", home_show_detail_month_path(:month => month), remote: true, class: "btn btn-link" %></td>
           </tr>
           <% end %>
         </tbody>
