@@ -41,7 +41,7 @@
             <td class="center-text-v"><%= simulated.credit_card_name %></td>
             <td class="center-text-v"><%= "#{fee}/#{simulated.fees}" %></td>
             <td class="center-text-v"><%= simulated.first_payment.advance(months: (fee - 1)).strftime("%b%y") %></td>
-            <td class="center-text-v"><%= to_current (simulated.amount / simulated.fees).round(2) %></td>
+            <td class="center-text-v"><%= number_to_currency (simulated.amount / simulated.fees) %></td>
             <td class="center-text-v"><%= "Simulado" %></td>
             <td class="center-text-v"></td>
           </tr>
@@ -82,7 +82,7 @@
           <% @months_resume.each do |month| %>
           <tr>
             <td class="center-text-v"><%= l(month[0], format: :month_year_abbr) %></td>
-            <td class="center-text-v"><%= link_to "#{to_current month[1]}", home_show_detail_month_path(:month => month), remote: true, class: "btn btn-link" %></td>
+            <td class="center-text-v"><%= link_to "#{number_to_currency month[1]}", home_show_detail_month_path(:month => month), remote: true, class: "btn btn-link" %></td>
           </tr>
           <% end %>
         </tbody>

@@ -36,7 +36,7 @@ class Purchase < ApplicationRecord
       for i in 0..(purchase.fees - 1)
         if purchase.payments.count > 0
           to_pay = purchase.payments.where(fee: i+1).first
-          if to_pay.status == "Para pagar"
+          if to_pay.month_to_pay.beginning_of_month >= Date.today
             fee_amount = to_pay.amount
           else
             fee_amount = 0
@@ -55,9 +55,9 @@ class Purchase < ApplicationRecord
           end #if
         end #each_do m
         unless added
-          if fee_amount > 0
+          #if fee_amount > 0
             resume << [payment_date, fee_amount]
-          end
+          #end
         end #unless added
       end #for
     end #each_do purchase
