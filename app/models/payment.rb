@@ -52,9 +52,18 @@ class Payment < ApplicationRecord
     return ok
   end #add_payments
 
-  def self.months_resume
-    payments = Payment.all
-
-    return [['Feb18',5000],['Mar18',4500],['Abr18',4000],['May18',4000]]
+  def self.by_month(user, month)
+    first_day = Date.parse(month).beginning_of_month
+    last_day = Date.parse(month).end_of_month
+    range = first_day..last_day
+    payments = user.payments.where(status: 'Para pagar') #.where('month_to_pay BETWEEN ? AND ?', first_day, last_day)
+    this_month = []
+    payments.each do |pay|
+      pay_month = pay.month_to_pay
+      if (range===pay_month)
+        this_month << pay
+      end
+    end
+    return this_month
   end
 end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
+  get 'home/show_detail_month'
   resources :credit_cards
   resources :taxes
   resources :purchases do

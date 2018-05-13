@@ -30,7 +30,20 @@
             <% elsif payment.status == "Pagado" %>
             <%= link_to icon('fas','dollar-sign'), unpay_payment_path(payment), method: :post, class: "btn btn-danger btn-sm" %>
             <% end %>
-            <%= link_to "Edit", edit_payment_path(payment), class: "btn btn-warning btn-sm" %>
+            <%= link_to icon('fas','edit'), edit_payment_path(payment), class: "btn btn-warning btn-sm" %>
+          </td>
+        </tr>
+        <% end %>
+        <% @taxes.each do |tax| %>
+        <tr class="<%=  %>">
+          <td class="center-text-v"><%= tax.name %></td>
+          <td class="center-text-v"> Efectivo / Home Banking</td>
+          <td class="center-text-v"> --- </td>
+          <td class="center-text-v"><%= l(tax.exp_date, format: :month_year_abbr) %></td>
+          <td class="center-text-v"><%= number_to_currency tax.amount %></td>
+          <td class="center-text-v"><%= tax.status %></td>
+          <td class="center-text-v">
+            <%= link_to icon('fas','edit'), edit_tax_path(tax), class: "btn btn-warning btn-sm" %>
           </td>
         </tr>
         <% end %>
@@ -41,7 +54,7 @@
             <td class="center-text-v"><%= simulated.credit_card_name %></td>
             <td class="center-text-v"><%= "#{fee}/#{simulated.fees}" %></td>
             <td class="center-text-v"><%= simulated.first_payment.advance(months: (fee - 1)).strftime("%b%y") %></td>
-            <td class="center-text-v"><%= to_current (simulated.amount / simulated.fees).round(2) %></td>
+            <td class="center-text-v"><%= number_to_currency (simulated.amount / simulated.fees) %></td>
             <td class="center-text-v"><%= "Simulado" %></td>
             <td class="center-text-v"></td>
           </tr>
@@ -71,7 +84,7 @@
     </div> <!-- END modal-body -->
     <br>
     <div id="amounts-per-month">
-      <table class="table table-hover">
+      <table class="table table-hover table-striped table-bordered table-sm">
         <thead>
           <tr>
             <th>Mes</th>
@@ -81,8 +94,9 @@
         <tbody>
           <% @months_resume.each do |month| %>
           <tr>
-            <td><%= l(month[0], format: :month_year_abbr) %></td>
-            <td><%= to_current month[1] %></td>
+
+            <td class="center-text-v"><%= l(month[0], format: :month_year_abbr) %></td>
+            <td class="center-text-v"><%= link_to "#{to_current month[1]}", home_show_detail_month_path(:month => month), remote: true, class: "btn btn-link" %></td>
           </tr>
           <% end %>
         </tbody>

@@ -29,8 +29,8 @@ class Purchase < ApplicationRecord
   end #End_has_payments?
 
   #### CLASS METHODS
-  def self.months_resume
-    purchases = Purchase.all.order(first_payment: :asc)
+  def self.months_resume(user)
+    purchases = user.purchases.all.order(first_payment: :asc)
     resume = [] # [["Feb18",5000]]
     purchases.each do |purchase|
       for i in 0..(purchase.fees - 1)
