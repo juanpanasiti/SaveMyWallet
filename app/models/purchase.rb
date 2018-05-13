@@ -55,9 +55,9 @@ class Purchase < ApplicationRecord
           end #if
         end #each_do m
         unless added
-          #if fee_amount > 0
+          if to_pay.month_to_pay >= Date.today.beginning_of_month
             resume << [payment_date, fee_amount]
-          #end
+          end
         end #unless added
       end #for
     end #each_do purchase
