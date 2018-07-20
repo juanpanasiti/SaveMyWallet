@@ -6,6 +6,7 @@
     <%= favicon_link_tag 'piggy-bank.png' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
@@ -56,7 +57,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    
+
       <% end %>
       <%= yield %>
     </div>
